@@ -11,6 +11,8 @@ This is a dashboard aiming to analyze the berry yield dataset recorded on a week
 
 After the model selection process based on the MSE in the validation set, SARIMA is decided as the final model. The prediction results of both models will be exhibited in this dashboard.
 
+<!-- Complete analysis process is stored in a Jupyter Notebook file named as `Naturipe_Farms.ipynb`. Due to confidential purpose, this file is stored in [another private GitHub repository](https://github.com/Mingxuan-Yang/Berry-Yield-Prediction-Appendix). -->
+
 ## Streamlit Dashboard
 
 This dashboard includes the following three parts:

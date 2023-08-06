@@ -6,7 +6,7 @@ import altair as alt
 from PIL import Image
 
 session = st.sidebar.selectbox("Section", ["Introduction", "Data Analysis", "Prediction"])
-st.title('Berry Production')
+st.title('Berry Yield Prediction')
 df = pd.read_excel('sample.xlsx', header=None, names=['y'])
 df['Week'] = list(range(1, df.shape[0] + 1))
 yhats = pd.read_csv('yhat.csv')
@@ -19,12 +19,12 @@ if session == "Introduction":
     st.image(image, width=700)
     st.subheader("Introduction")
     st.write("""
-    This is a dashboard aiming to analyze the berry production dataset recorded on a weekly basis.
-    The major goal of this project is to predict the berry productions in the next 10 weeks.
+    This is a dashboard aiming to analyze the berry yield dataset recorded on a weekly basis.
+    The major goal of this project is to predict the berry yield in the next 10 weeks.
     The original dataset only contains the production information, and no other information like the dates of records is provided.
     Being a typical time series problem with apparent seasonal trend, Seasonal Autoregressive Integrated Moving Average (SARIMA) and Facebook Prophet are applied to get the prediction results.
     After the model selection process based on the MSE in the validation set, SARIMA is decided as the final model.
-    But the prediction results of both models will be exhibited in this dashboard.
+    The prediction results of both models will be exhibited in this dashboard.
 
     This dashboard includes the following three parts:
     - Introduction
@@ -95,10 +95,10 @@ if session == "Data Analysis":
         # show figure
         ex = st.checkbox('See Explanation')
         if ex:
-            st.write("""This is the visualization of the original weekly dataset, which describes the general trend of berry production.
-            By adjusting the slider, users can select a specific time range to study the berry production fluctuation within that period.
-            Based on the figure, there is a consistent seasonal pattern on berry production.""")
-        st.subheader('Weekly Berry Production')
+            st.write("""This is the visualization of the original weekly dataset, which describes the general trend of berry yield.
+            By adjusting the slider, users can select a specific time range to study the berry yield fluctuation within that period.
+            Based on the figure, there is a consistent seasonal pattern on berry yield.""")
+        st.subheader('Weekly Berry Yield')
         st.altair_chart(fig1, use_container_width=True)
 
     if parts == "Periodic Data":
@@ -134,10 +134,10 @@ if session == "Data Analysis":
         if ex:
             st.write("""This figure breaks the original dataset into separate year by approximating one year as 52 weeks.
             The sidebars allow the users to determine the starting week and included years.
-            The berry production data before the starting week and outside of the included years will not show in the figure.
+            The berry yield data before the starting week and outside of the included years will not show in the figure.
             By reading this chart, the weekly data at the same position in each cycle can be easily compared.
             For example, we can see that the cycle peak is moving across time.""")
-        st.subheader('Weekly Berry Production in Each Year')
+        st.subheader('Weekly Berry Yield in Each Year')
         st.altair_chart(fig4, use_container_width=True)
 
 if session == "Prediction":
@@ -226,10 +226,10 @@ if session == "Prediction":
         if ex:
             st.write("""The model selection procedure can be accessed at the Jupyter notebook.
             The model applied currently in this section is {}.
-            Parameter tuning has been conducted for the final model. The goal is to predict the berry production in the next 10 weeks.
+            Parameter tuning has been conducted for the final model. The goal is to predict the berry yield in the next 10 weeks.
             The exact predicted data is shown in the table at bottom, where the week IDs are represented by their index in the original dataset starting from 1.""".format(
                 model))
-        st.subheader('Predicted and True Berry Production on a Weekly Basis')
+        st.subheader('Predicted and True Berry Yield on a Weekly Basis')
         st.altair_chart(fig2, use_container_width=True)
         check = st.checkbox('Show the Next 10 Weeks of Productions Using {}'.format(model), value=False)
         if check:
@@ -259,9 +259,9 @@ if session == "Prediction":
         # figure
         ex = st.checkbox('See Explanation')
         if ex:
-            st.write("""In this section, the goal is to compare the predicted berry production values in the next 10 weeks with their counterparts in the previous years.
-            The week IDs starts from 236 and ends with 245. The approximate trend of production can be obtained through this figure.""")
-        st.subheader('Berry Production Comparison for Each Year')
+            st.write("""In this section, the goal is to compare the predicted berry yield values in the next 10 weeks with their counterparts in the previous years.
+            The week IDs starts from 236 and ends with 245. The approximate trend of yield can be obtained through this figure.""")
+        st.subheader('Berry Yield Comparison for Each Year')
         st.write(fig3)
         check = st.checkbox('Show the Next 10 Weeks of Productions Using {}'.format(model), value=False)
         if check:
@@ -301,10 +301,10 @@ if session == "Prediction":
         # show figure
         ex = st.checkbox('See Explanation')
         if ex:
-            st.write("""The objective for this figure is to detect whether the production trend in the last year accords with the corresponding trends in the previous years.
+            st.write("""The objective for this figure is to detect whether the yield trend in the last year accords with the corresponding trends in the previous years.
             The black dotted vertical lines in each figure denote the counterpart of the starting week of prediction.
             Similar to the Data Analysis section, starting week and included years can be adjusted using the sidebars.""")
-        st.subheader('Weekly Berry Production in Each Year Including the Predicted Values')
+        st.subheader('Weekly Berry Yield in Each Year Including the Predicted Values')
         st.altair_chart(fig5, use_container_width=True)
         check = st.checkbox('Show the Next 10 Weeks of Productions Using {}'.format(model), value=False)
         if check:
